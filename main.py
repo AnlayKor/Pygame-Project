@@ -4,6 +4,7 @@ import math
 
 def draw():
     screen.fill('black')
+    draw_text()
 
     pygame.draw.circle(screen, get_circle_color(0), get_circle_center(0), radius)
     pygame.draw.circle(screen, get_circle_color(120), get_circle_center(120), radius)
@@ -13,6 +14,14 @@ def draw():
 def update(delta):
     global angle
     angle = (angle + 180 * delta) % 360
+
+
+def draw_text():
+    font = pygame.font.Font(None, 40)
+    text = font.render('Загрузка' + '.' * int(angle // 90), True, get_circle_color(0))
+    text_x = width // 2 - text.get_width() // 2
+    text_y = height // 10 * 9 - text.get_height() // 2
+    screen.blit(text, (text_x, text_y))
 
 
 def get_circle_center(n):
