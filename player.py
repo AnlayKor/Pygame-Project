@@ -19,7 +19,7 @@ class Player(Sprite):
         self.x = self.rect.x
         self.y = self.rect.y
 
-        self.speed = 500
+        self.speed = 200
         self.x_direction = 0
         self.y_direction = 0
 
