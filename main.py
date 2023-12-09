@@ -1,6 +1,7 @@
 import pygame
 
 from player import Player
+from wall import Wall
 
 
 class Game:
@@ -10,7 +11,11 @@ class Game:
         self.screen = pygame.display.set_mode(self.size)
 
         self.all_sprites = pygame.sprite.Group()
-        self.player = Player(self, self.all_sprites)
+        self.player = Player(self, self.width // 2, self.height // 2, self.all_sprites)
+
+        self.walls = []
+        self.walls.append(Wall(self, 200, 100, 200, 50, self.all_sprites))
+        self.walls.append(Wall(self, 300, 400, 50, 50, self.all_sprites))
 
         self.running = True
         self.clock = pygame.time.Clock()
@@ -29,7 +34,7 @@ class Game:
         pygame.quit()
 
     def draw(self):
-        self.screen.fill((20, 20, 20))
+        self.screen.fill((50, 50, 50))
         self.all_sprites.draw(self.screen)
 
     def update(self, frame_time):
