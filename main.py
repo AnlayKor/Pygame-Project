@@ -1,13 +1,15 @@
 import pygame
+import sys
 
 from player import Player
 from wall import Wall
+from start_screen import StartScreen
 
 
 class Game:
     def __init__(self):
         pygame.init()
-        self.size = self.width, self.height = 500, 500
+        self.size = self.width, self.height = 800, 500
         self.screen = pygame.display.set_mode(self.size)
 
         self.all_sprites = pygame.sprite.Group()
@@ -20,10 +22,11 @@ class Game:
         self.running = True
         self.clock = pygame.time.Clock()
 
-        while self.running:
+        self.open_start_screen()
+        while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.running = False
+                    self.terminate()
                 for sprite in self.all_sprites:
                     sprite.event(event)
 
@@ -31,7 +34,10 @@ class Game:
 
             self.draw()
             pygame.display.flip()
+
+    def terminate(self):
         pygame.quit()
+        sys.exit()
 
     def draw(self):
         self.screen.fill((50, 50, 50))
@@ -40,6 +46,9 @@ class Game:
     def update(self, frame_time):
         delta = frame_time / 1000
         self.all_sprites.update(delta)
+
+    def open_start_screen(self):
+        StartScreen(self)
 
 
 if __name__ == "__main__":
