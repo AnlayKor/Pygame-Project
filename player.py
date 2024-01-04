@@ -24,12 +24,30 @@ class Player(AnimatedSprite):
         self.x_direction = 0
         self.y_direction = 0
 
-        self.animation_fps = 2
+        self.idle_fps = 2
+        self.walk_fps = 8
+        self.animation_fps = self.idle_fps
+        self.cur_animation = 'idle'
         self.time_before_next_frame = 1
 
         self.is_left = False
 
+    def change_animation(self, animation):
+        self.cur_frame = 0
+        self.cur_animation = animation
+
+        if animation == 'idle':
+            image = pygame.transform.scale_by(self.load_image('antonidle.png'), 4)
+            self.cut_sheet(image, 1, 2)
+            self.animation_fps = self.idle_fps
+        if animation == 'walk':
+            image = pygame.transform.scale_by(self.load_image('antonwalk.png'), 4)
+            self.cut_sheet(image, 2, 2)
+            self.animation_fps = self.walk_fps
+
     def update(self, delta):
+        # getting player direction
+
         self.x_direction = self.y_direction = 0
         keys = pygame.key.get_pressed()
 
@@ -45,19 +63,39 @@ class Player(AnimatedSprite):
         if self.x_direction != 0:
             self.is_left = self.x_direction < 0
 
+
+        # changing animation
+
+        if self.x_direction or self.y_direction:
+            if self.cur_animation != 'walk':
+                self.change_animation('walk')
+        elif self.cur_animation != 'idle':
+            self.change_animation('idle')
+
+
+        # changing animation frame
+
         self.time_before_next_frame -= self.animation_fps * delta
         if self.time_before_next_frame <= 0:
             self.time_before_next_frame = 1
             self.cur_frame = (self.cur_frame + 1) % len(self.frames)
+
+        # flip if player going left
 
         if self.is_left:
             self.image = pygame.transform.flip(self.frames[self.cur_frame], 1, 0)
         else:
             self.image = self.frames[self.cur_frame]
 
+
+        # normalizing player's direction
+
         if self.x_direction and self.y_direction:
             self.x_direction /= math.sqrt(2)
             self.y_direction /= math.sqrt(2)
+
+
+        # moving player
 
         self.move(self.x_direction * self.speed * delta,
                   self.y_direction * self.speed * delta)

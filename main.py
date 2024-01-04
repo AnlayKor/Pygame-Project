@@ -42,8 +42,6 @@ class Game:
     def draw(self):
         self.screen.fill((50, 50, 50))
 
-        pygame.draw.rect(self.screen, 'green', self.player.rect)
-
         self.all_sprites.draw(self.screen)
 
     def update(self, frame_time):
