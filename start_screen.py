@@ -26,7 +26,8 @@ class StartScreen(Sprite):
         pygame.draw.line(game.screen, 'red',
                          (20, 75), (375, 75), 10)
 
-        while True:
+        running = True
+        while running:
             text2 = font.render('Начать игру', True, color2)
             text2_x = text.get_width() // 2 - text2.get_width() // 2 + text_x
             text2_y = 300
@@ -64,7 +65,7 @@ class StartScreen(Sprite):
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
                         if f2:
-                            pass
+                            running = False
                         elif f3:
                             pass
             pygame.display.flip()

@@ -1,11 +1,11 @@
 import math
 import pygame
 
-from sprite import Sprite
+from animated_sprite import AnimatedSprite
 from wall import Wall
 
 
-class Player(Sprite):
+class Player(AnimatedSprite):
     image = None
     left_keys = (pygame.K_LEFT, pygame.K_a)
     right_keys = (pygame.K_RIGHT, pygame.K_d)
@@ -13,8 +13,9 @@ class Player(Sprite):
     down_keys = (pygame.K_DOWN, pygame.K_s)
 
     def __init__(self, game, x, y, *groups):
-        Player.image = pygame.transform.scale(self.load_image('player.png'), (50, 50))
-        super().__init__(game, Player.image, *groups)
+        # Player.image = pygame.transform.scale(self.load_image('antonidle.png'), (80, 80))
+        Player.image = pygame.transform.scale_by(self.load_image('antonidle.png'), 4)
+        super().__init__(game, Player.image, 1, 2, *groups)
         self.rect.center = x, y
         self.x = self.rect.x
         self.y = self.rect.y
@@ -22,6 +23,11 @@ class Player(Sprite):
         self.speed = 200
         self.x_direction = 0
         self.y_direction = 0
+
+        self.animation_fps = 2
+        self.time_before_next_frame = 1
+
+        self.is_left = False
 
     def update(self, delta):
         self.x_direction = self.y_direction = 0
@@ -35,6 +41,19 @@ class Player(Sprite):
             self.y_direction -= 1
         if keys[self.down_keys[0]] or keys[self.down_keys[1]]:
             self.y_direction += 1
+
+        if self.x_direction != 0:
+            self.is_left = self.x_direction < 0
+
+        self.time_before_next_frame -= self.animation_fps * delta
+        if self.time_before_next_frame <= 0:
+            self.time_before_next_frame = 1
+            self.cur_frame = (self.cur_frame + 1) % len(self.frames)
+
+        if self.is_left:
+            self.image = pygame.transform.flip(self.frames[self.cur_frame], 1, 0)
+        else:
+            self.image = self.frames[self.cur_frame]
 
         if self.x_direction and self.y_direction:
             self.x_direction /= math.sqrt(2)
