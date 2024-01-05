@@ -12,6 +12,8 @@ class Game:
         self.size = self.width, self.height = 800, 500
         self.screen = pygame.display.set_mode(self.size)
 
+        self.open_start_screen()
+
         self.all_sprites = pygame.sprite.Group()
         self.player = Player(self, self.width // 2, self.height // 2, self.all_sprites)
 
@@ -22,7 +24,6 @@ class Game:
         self.running = True
         self.clock = pygame.time.Clock()
 
-        self.open_start_screen()
         while True:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:

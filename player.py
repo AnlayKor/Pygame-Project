@@ -14,7 +14,11 @@ class Player(AnimatedSprite):
 
     def __init__(self, game, x, y, *groups):
         # Player.image = pygame.transform.scale(self.load_image('antonidle.png'), (80, 80))
-        Player.image = pygame.transform.scale_by(self.load_image('antonidle.png'), 4)
+        self.idle_image = None
+        self.walk_image = None
+        self.load_character_images(game.character)
+
+        Player.image = self.idle_image
         super().__init__(game, Player.image, 1, 2, *groups)
         self.rect.center = x, y
         self.x = self.rect.x
@@ -37,13 +41,21 @@ class Player(AnimatedSprite):
         self.cur_animation = animation
 
         if animation == 'idle':
-            image = pygame.transform.scale_by(self.load_image('antonidle.png'), 4)
+            image = self.idle_image
             self.cut_sheet(image, 1, 2)
             self.animation_fps = self.idle_fps
         if animation == 'walk':
-            image = pygame.transform.scale_by(self.load_image('antonwalk.png'), 4)
+            image = self.walk_image
             self.cut_sheet(image, 2, 2)
             self.animation_fps = self.walk_fps
+
+    def load_character_images(self, character):
+        if character == 'anton':
+            self.idle_image = pygame.transform.scale_by(self.load_image('antonidle.png'), 4)
+            self.walk_image = pygame.transform.scale_by(self.load_image('antonwalk.png'), 4)
+        else:
+            self.idle_image = pygame.transform.scale_by(self.load_image('vikaidle.png'), 4)
+            self.walk_image = pygame.transform.scale_by(self.load_image('vikawalk.png'), 4)
 
     def update(self, delta):
         # getting player direction

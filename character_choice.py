@@ -1,9 +1,8 @@
 import pygame
 from sprite import Sprite
-from character_choice import CharacterChoice
 
 
-class StartScreen(Sprite):
+class CharacterChoice(Sprite):
     def __init__(self, game, *groups):
         fon = pygame.transform.scale(self.load_image('fon.png'), (game.width, game.height))
         super().__init__(game, fon, *groups)
@@ -29,7 +28,7 @@ class StartScreen(Sprite):
 
         running = True
         while running:
-            text2 = font.render('Начать игру', True, color2)
+            text2 = font.render('Антон', True, color2)
             text2_x = text.get_width() // 2 - text2.get_width() // 2 + text_x
             text2_y = 300
             game.screen.blit(text2, (text2_x, text2_y))
@@ -37,7 +36,7 @@ class StartScreen(Sprite):
             pygame.draw.rect(game.screen, color2, (text2_x - 20, text2_y - 20,
                                                    text2.get_width() + 40, text2.get_height() + 40), 2)
 
-            text3 = font.render('Достижения', True, color3)
+            text3 = font.render('Вика', True, color3)
             text3_x = text.get_width() // 2 - text3.get_width() // 2 + text_x
             text3_y = 400
             game.screen.blit(text3, (text3_x, text3_y))
@@ -66,11 +65,12 @@ class StartScreen(Sprite):
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
                         if f2:
-                            self.open_character_choice()
+                            self.choose_character('anton')
                             running = False
                         elif f3:
-                            pass
+                            self.choose_character('vika')
+                            running = False
             pygame.display.flip()
 
-    def open_character_choice(self):
-        CharacterChoice(self.game)
+    def choose_character(self, character):
+        self.game.character = character
