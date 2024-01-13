@@ -19,7 +19,7 @@ class Player(AnimatedSprite):
         self.load_character_images(game.character)
 
         Player.image = self.idle_image
-        super().__init__(game, Player.image, 1, 2, *groups)
+        super().__init__(game, Player.image, 2, 1, *groups)
         self.rect.center = x, y
         self.x = self.rect.x
         self.y = self.rect.y
@@ -42,7 +42,7 @@ class Player(AnimatedSprite):
 
         if animation == 'idle':
             image = self.idle_image
-            self.cut_sheet(image, 1, 2)
+            self.cut_sheet(image, 2, 1)
             self.animation_fps = self.idle_fps
         if animation == 'walk':
             image = self.walk_image
