@@ -6,7 +6,7 @@ class CharacterChoice(Sprite):
     def __init__(self, game, *groups):
         anton = pygame.transform.scale(self.load_image('anton.png'), (200, 200))
         vika = pygame.transform.scale(self.load_image('vika.png'), (200, 200))
-        noname = pygame.transform.scale(self.load_image('player.png'), (200, 200))
+        noname = pygame.transform.scale(self.load_image('noname.png'), (200, 200))
         super().__init__(game, anton, *groups)
         game.screen.fill((0, 0, 0))
 
@@ -24,19 +24,20 @@ class CharacterChoice(Sprite):
         font = pygame.font.Font(None, 40)
         stealth_font = pygame.font.Font(None, 35)
 
-        text = font_name.render('Выберите уровень сложности', True, 'red')
-        text_x = game.width // 2 - text.get_width() // 2
-        text_y = 40
-        game.screen.blit(text, (text_x, text_y))
-
         running = True
         while running:
+            game.screen.fill('black')
+            text = font_name.render('Выберите уровень сложности', True, 'red')
+            text_x = game.width // 2 - text.get_width() // 2
+            text_y = 40
+            game.screen.blit(text, (text_x, text_y))
+
             noname_x = game.width // 3 // 2 - noname.get_width() // 2
             noname_y = 80 + text.get_height()
             game.screen.blit(noname, (noname_x, noname_y))
 
             pygame.draw.rect(game.screen, 'red', (noname_x, noname_y,
-                                                   noname.get_width(), noname.get_height()), 4)
+                                                  noname.get_width(), noname.get_height()), 4)
 
             anton_x = game.width // 3 * 2 + game.width // 3 // 2 - anton.get_width() // 2
             anton_y = 80 + text.get_height()
@@ -72,7 +73,8 @@ class CharacterChoice(Sprite):
             stealth_text1_y = text2_y + text2.get_height() + 10
             game.screen.blit(stealth_text1, (stealth_text1_x, stealth_text1_y))
 
-            stealth_text2 = stealth_font.render('Средняя девочка + средние способности = средняя сложность', True, stealth_color2)
+            stealth_text2 = stealth_font.render('Средняя девочка + средние способности = средняя сложность', True,
+                                                stealth_color2)
             stealth_text2_x = game.width // 2 - stealth_text2.get_width() // 2
             stealth_text2_y = stealth_text1_y + stealth_text1.get_height() + 10
             game.screen.blit(stealth_text2, (stealth_text2_x, stealth_text2_y))
@@ -82,7 +84,8 @@ class CharacterChoice(Sprite):
             stealth_text3_y = stealth_text2_y + stealth_text2.get_height() + 10
             game.screen.blit(stealth_text3, (stealth_text3_x, stealth_text3_y))
 
-            stealth_text4 = stealth_font.render('и повышенная агрессивнсть монстров усложняют игру', True, stealth_color3)
+            stealth_text4 = stealth_font.render('и повышенная агрессивнсть монстров усложняют игру', True,
+                                                stealth_color3)
             stealth_text4_x = game.width // 2 - stealth_text4.get_width() // 2
             stealth_text4_y = stealth_text3_y + stealth_text3.get_height() + 10
             game.screen.blit(stealth_text4, (stealth_text4_x, stealth_text4_y))
@@ -90,10 +93,10 @@ class CharacterChoice(Sprite):
             if f1:
                 pygame.draw.line(game.screen, 'red',
                                  (noname_x + 4, noname_y + 4), (noname_x + noname.get_width() - 4,
-                                                        noname_y + noname.get_height() - 4), 6)
+                                                                noname_y + noname.get_height() - 4), 6)
                 pygame.draw.line(game.screen, 'red',
                                  (noname_x + 4, noname_y + noname.get_height() - 4), (noname_x + noname.get_width() - 4,
-                                                                noname_y + 4), 6)
+                                                                                      noname_y + 4), 6)
                 stealth_color1 = pygame.color.Color((255, 0, 0))
             else:
                 stealth_color1 = pygame.color.Color((0, 0, 0))
