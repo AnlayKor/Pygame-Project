@@ -42,7 +42,25 @@ class Game:
 
     def draw(self):
         self.screen.fill((50, 50, 50))
+        self.draw_bg()
         self.all_sprites.draw(self.screen)
+
+    def draw_bg(self):
+        size = 20
+        for i in range(0, self.screen.get_width(), size):
+            for j in range(0, self.screen.get_height(), size):
+                if i % (size * 2):
+                    if j % (size * 2):
+                        color = '#494949'
+                    else:
+                        color = '#3a3a3a'
+                else:
+                    if j % (size * 2):
+                        color = '#3a3a3a'
+                    else:
+                        color = '#494949'
+                rect = (i, j, size, size)
+                pygame.draw.rect(self.screen, color, rect)
 
     def update(self, frame_time):
         delta = frame_time / 1000
