@@ -167,4 +167,5 @@ class Player(AnimatedSprite):
 
     def event(self, event: pygame.event.Event):
         if event.type == pygame.MOUSEBUTTONDOWN:
-            self.weapon.attack(event.pos)
+            if event.button == 1:
+                self.weapon.attack(event.pos)
