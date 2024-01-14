@@ -1,9 +1,9 @@
 W,W,W,W,W,W,W,W,W,W,W,W,W,W
 W,P,W,C,C,C, , , , , , , ,W
-W, ,W,C,B,C, , , , , ,W, ,W
-W, ,W,C,C,C, , , , , ,W, ,W
+W, ,W,C,B,C, ,1, , , ,W, ,W
+W, ,W,C,C,C, , , ,0, ,W, ,W
 W, ,W, , , , , , , , ,W, ,W
-W, ,W, , , , , ,C,C,C,W, ,W
+W, ,W, , ,3, , ,C,C,C,W, ,W
 W, ,W, , , , , ,C,B,C,W, ,W
-W, , , , , , , ,C,C,C,W, ,W
-W,W,W,W,W,W,W,W,W,W,W,W,D,W
+W, , , , , , , ,C,C,C,W, ,D
+W,W,W,W,W,W,W,W,W,W,W,W,W,W
