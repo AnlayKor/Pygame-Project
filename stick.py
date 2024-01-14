@@ -24,7 +24,7 @@ class Stick(AnimatedSprite):
         self.attacking = False
         self.flipping = False
 
-        self.damage = 1
+        self.damage = 5
 
     def update(self, delta):
         self.rect.center = self.player.rect.center
