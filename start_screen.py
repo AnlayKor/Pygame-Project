@@ -15,17 +15,20 @@ class StartScreen(Sprite):
         f2 = False
         f3 = False
 
-        font_name = pygame.font.Font(None, 60)
+        font_name = pygame.font.Font(None, 80)
 
         font = pygame.font.Font(None, 40)
 
         text = font_name.render('LMS Attack', True, 'red')
-        text_x = 100
+        text_x = 50
         text_y = 175
         game.screen.blit(text, (text_x, text_y))
 
         pygame.draw.line(game.screen, 'red',
-                         (20, 75), (375, 75), 10)
+                         (20, 80), (385, 80), 10)
+
+        pygame.draw.rect(game.screen, 'black',
+                         (20, 455, 65, 70))
 
         running = True
         while running:
