@@ -20,6 +20,8 @@ class Bug(Enemy):
         self.x = self.rect.x
         self.y = self.rect.y
 
+        self.health = 100
+
         self.speed = 40
         self.x_direction = 0
         self.y_direction = 0

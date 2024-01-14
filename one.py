@@ -19,6 +19,8 @@ class One(Enemy):
         self.x = self.rect.x
         self.y = self.rect.y
 
+        self.health = 30
+
         self.speed = 60
         self.x_direction = 0
         self.y_direction = 0
