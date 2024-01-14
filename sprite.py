@@ -23,7 +23,7 @@ class Sprite(pygame.sprite.Sprite):
         return image
 
     def __init__(self, game, image: pygame.Surface, *groups):
-        super().__init__(*groups)
+        super().__init__(*groups, game.all_sprites)
         self.game = game
         self.image = image
         self.rect = self.image.get_rect()

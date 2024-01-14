@@ -4,25 +4,27 @@ import sys
 from player import Player
 from wall import Wall
 from start_screen import StartScreen
+from level1 import Level1
 
 
 class Game:
     def __init__(self):
         pygame.init()
-        self.size = self.width, self.height = 800, 500
+        self.all_sprites = None
+        self.floors = None
+        self.walls = None
+        self.entities = None
+        self.reset_sprites()
+
+        self.size = self.width, self.height = 60 * 14, 60 * 9
         self.screen = pygame.display.set_mode(self.size)
 
         self.open_start_screen()
 
-        self.all_sprites = pygame.sprite.Group()
-        self.player = Player(self, self.width // 2, self.height // 2, self.all_sprites)
-
-        self.walls = []
-        self.walls.append(Wall(self, 200, 100, 200, 50, self.all_sprites))
-        self.walls.append(Wall(self, 300, 400, 50, 50, self.all_sprites))
-
         self.running = True
         self.clock = pygame.time.Clock()
+
+        self.start_level1()
 
         while True:
             for event in pygame.event.get():
@@ -41,9 +43,18 @@ class Game:
         sys.exit()
 
     def draw(self):
-        self.screen.fill((50, 50, 50))
+        self.screen.fill((20, 20, 20))
         self.draw_bg()
-        self.all_sprites.draw(self.screen)
+
+        self.floors.draw(self.screen)
+        self.walls.draw(self.screen)
+        self.entities.draw(self.screen)
+
+    def reset_sprites(self):
+        self.all_sprites = pygame.sprite.Group()
+        self.floors = pygame.sprite.Group()
+        self.walls = pygame.sprite.Group()
+        self.entities = pygame.sprite.Group()
 
     def draw_bg(self):
         size = 20
@@ -68,6 +79,9 @@ class Game:
 
     def open_start_screen(self):
         StartScreen(self)
+
+    def start_level1(self):
+        Level1(self)
 
 
 if __name__ == "__main__":
