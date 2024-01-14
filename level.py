@@ -43,7 +43,10 @@ class Level:
         self.wall = f'wall{self.level}.png'
         self.floor = f'floor{self.level}.png'
         if self.level == 1 and self.room == 2:
+            self.game.instructions_number = 3
             self.game.instructions = True
+        elif self.level == 1 and self.room == 3:
+            self.game.instructions = False
         with open(os.path.join('data/levels/', level, room)) as file:
             reader = csv.reader(file, delimiter=',', quotechar='"')
             for i, row in enumerate(reader):
