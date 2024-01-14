@@ -4,7 +4,7 @@ import sys
 from player import Player
 from wall import Wall
 from start_screen import StartScreen
-from level1 import Level1
+from level import Level
 
 
 class Game:
@@ -27,7 +27,7 @@ class Game:
         self.running = True
         self.clock = pygame.time.Clock()
 
-        self.start_level1()
+        self.start()
 
         while True:
             for event in pygame.event.get():
@@ -101,8 +101,8 @@ class Game:
     def open_start_screen(self):
         StartScreen(self)
 
-    def start_level1(self):
-        Level1(self)
+    def start(self):
+        Level(self)
 
 
 if __name__ == "__main__":
