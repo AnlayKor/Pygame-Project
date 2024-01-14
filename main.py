@@ -17,6 +17,7 @@ class Game:
         self.floors = None
         self.walls = None
         self.entities = None
+        self.projectiles = None
         self.reset_sprites()
 
         self.size = self.width, self.height = 60 * 14, 60 * 9
@@ -52,6 +53,7 @@ class Game:
         self.floors.draw(self.screen)
         self.walls.draw(self.screen)
         self.entities.draw(self.screen)
+        self.projectiles.draw(self.screen)
 
         if self.character == 'anton':
             self.display_name('Антон')
@@ -76,6 +78,7 @@ class Game:
         self.floors = pygame.sprite.Group()
         self.walls = pygame.sprite.Group()
         self.entities = pygame.sprite.Group()
+        self.projectiles = pygame.sprite.Group()
 
     def draw_bg(self):
         size = 20

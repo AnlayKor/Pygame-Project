@@ -37,6 +37,9 @@ class Player(AnimatedSprite):
 
         self.is_left = False
 
+    def get_damage(self, damage):
+        pass
+
     def change_animation(self, animation):
         self.cur_frame = 0
         self.cur_animation = animation
