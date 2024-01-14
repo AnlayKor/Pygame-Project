@@ -19,7 +19,7 @@ class Level:
         self.player = None
         self.door = None
 
-        self.level = None
+        self.level = 1
         self.room = 1
 
         self.game = game
@@ -27,15 +27,20 @@ class Level:
         self.floors = []
         self.tile_size = 60
 
+        self.load_room()
+
     def get_wall(self):
         return self.wall
 
     def get_floor(self):
         return self.floor
 
-    def load_room(self, room):
-        room = f'room{room}.csv'
-        with open(os.path.join('data/levels/', self.level, room)) as file:
+    def load_room(self):
+        room = f'room{self.room}.csv'
+        level = f'level{self.level}/'
+        self.wall = f'wall{self.level}.png'
+        self.floor = f'floor{self.level}.png'
+        with open(os.path.join('data/levels/', level, room)) as file:
             reader = csv.reader(file, delimiter=',', quotechar='"')
             for i, row in enumerate(reader):
                 for j, tile in enumerate(row):
@@ -76,5 +81,9 @@ class Level:
 
     def next_room(self):
         self.clear_room()
-        self.room += 1
-        self.load_room(self.room)
+        if self.room != 3:
+           self.room += 1
+        else:
+            self.room = 1
+            self.level += 1
+        self.load_room()
