@@ -6,6 +6,8 @@ from player import Player
 from wall import Wall
 from floor import Floor
 from door import Door
+from zero import Zero
+from one import One
 
 
 class Level:
@@ -35,7 +37,7 @@ class Level:
             reader = csv.reader(file, delimiter=',', quotechar='"')
             for i, row in enumerate(reader):
                 for j, tile in enumerate(row):
-                    if tile in '0PD':
+                    if tile not in 'W':
                         floor = Floor(self, j * self.tile_size, i * self.tile_size,
                                       self.tile_size, self.tile_size, self.game.floors)
                         self.floors.append(floor)
@@ -48,6 +50,10 @@ class Level:
                     if tile == 'D':
                         self.door = Door(self, j * self.tile_size, i * self.tile_size,
                                          self.tile_size, self.tile_size, self.game.walls)
+                    if tile == '0':
+                        Zero(self, j * self.tile_size, i * self.tile_size, self.game.entities)
+                    if tile == '1':
+                        One(self, j * self.tile_size, i * self.tile_size, self.game.entities)
 
     def clear_room(self):
         self.walls = []
