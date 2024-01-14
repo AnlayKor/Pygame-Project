@@ -19,7 +19,7 @@ class Level:
         self.player = None
         self.door = None
 
-        self.level = 3
+        self.level = 1
         self.room = 1
 
         self.game = game
