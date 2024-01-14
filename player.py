@@ -12,15 +12,16 @@ class Player(AnimatedSprite):
     up_keys = (pygame.K_UP, pygame.K_w)
     down_keys = (pygame.K_DOWN, pygame.K_s)
 
-    def __init__(self, game, x, y, *groups):
+    def __init__(self, level, x, y, *groups):
         # Player.image = pygame.transform.scale(self.load_image('antonidle.png'), (80, 80))
         self.idle_image = None
         self.walk_image = None
-        self.load_character_images(game.character)
+        self.load_character_images(level.game.character)
 
         Player.image = self.idle_image
-        super().__init__(game, Player.image, 2, 1, *groups)
-        self.rect.center = x, y
+        self.level = level
+        super().__init__(level.game, Player.image, 2, 1, *groups)
+        self.rect.topleft = x, y
         self.x = self.rect.x
         self.y = self.rect.y
 
@@ -51,11 +52,11 @@ class Player(AnimatedSprite):
 
     def load_character_images(self, character):
         if character == 'anton':
-            self.idle_image = pygame.transform.scale_by(self.load_image('antonidle.png'), 4)
-            self.walk_image = pygame.transform.scale_by(self.load_image('antonwalk.png'), 4)
+            self.idle_image = pygame.transform.scale_by(self.load_image('antonidle.png'), 3)
+            self.walk_image = pygame.transform.scale_by(self.load_image('antonwalk.png'), 3)
         else:
-            self.idle_image = pygame.transform.scale_by(self.load_image('vikaidle.png'), 4)
-            self.walk_image = pygame.transform.scale_by(self.load_image('vikawalk.png'), 4)
+            self.idle_image = pygame.transform.scale_by(self.load_image('vikaidle.png'), 3)
+            self.walk_image = pygame.transform.scale_by(self.load_image('vikawalk.png'), 3)
 
     def update(self, delta):
         # getting player direction
@@ -75,7 +76,6 @@ class Player(AnimatedSprite):
         if self.x_direction != 0:
             self.is_left = self.x_direction < 0
 
-
         # changing animation
 
         if self.x_direction or self.y_direction:
@@ -84,7 +84,6 @@ class Player(AnimatedSprite):
         elif self.cur_animation != 'idle':
             self.change_animation('idle')
 
-
         # changing animation frame
 
         self.time_before_next_frame -= self.animation_fps * delta
@@ -92,20 +91,18 @@ class Player(AnimatedSprite):
             self.time_before_next_frame = 1
             self.cur_frame = (self.cur_frame + 1) % len(self.frames)
 
-        # flip if player going left
+        # flipping if player going left
 
         if self.is_left:
             self.image = pygame.transform.flip(self.frames[self.cur_frame], 1, 0)
         else:
             self.image = self.frames[self.cur_frame]
 
-
         # normalizing player's direction
 
         if self.x_direction and self.y_direction:
             self.x_direction /= math.sqrt(2)
             self.y_direction /= math.sqrt(2)
-
 
         # moving player
 
@@ -114,9 +111,9 @@ class Player(AnimatedSprite):
 
     def move(self, x_speed, y_speed):
         if x_speed < 0:
-            i = pygame.rect.Rect(self.rect.left + x_speed, self.rect.top, 1, self.rect.h).collidelist(self.game.walls)
+            i = pygame.rect.Rect(self.rect.left + x_speed, self.rect.top, 1, self.rect.h).collidelist(self.level.walls)
             if i != -1:
-                wall: Wall = self.game.walls[i]
+                wall: Wall = self.level.walls[i]
                 x_speed = wall.rect.right - self.rect.left
             if self.rect.left > 0:
                 self.x += x_speed
@@ -124,9 +121,9 @@ class Player(AnimatedSprite):
                 self.rect.left = 0
                 self.x = self.rect.x
         if x_speed > 0:
-            i = pygame.rect.Rect(self.rect.right + x_speed, self.rect.top, 1, self.rect.h).collidelist(self.game.walls)
+            i = pygame.rect.Rect(self.rect.right + x_speed, self.rect.top, 1, self.rect.h).collidelist(self.level.walls)
             if i != -1:
-                wall: Wall = self.game.walls[i]
+                wall: Wall = self.level.walls[i]
                 x_speed = wall.rect.left - self.rect.right
             if self.rect.right < self.game.width:
                 self.x += x_speed
@@ -134,9 +131,9 @@ class Player(AnimatedSprite):
                 self.rect.right = self.game.width
                 self.x = self.rect.x
         if y_speed < 0:
-            i = pygame.rect.Rect(self.rect.left, self.rect.top + y_speed, self.rect.w, 1).collidelist(self.game.walls)
+            i = pygame.rect.Rect(self.rect.left, self.rect.top + y_speed, self.rect.w, 1).collidelist(self.level.walls)
             if i != -1:
-                wall: Wall = self.game.walls[i]
+                wall: Wall = self.level.walls[i]
                 y_speed = wall.rect.bottom - self.rect.top
             if self.rect.top > 0:
                 self.y += y_speed
@@ -144,9 +141,9 @@ class Player(AnimatedSprite):
                 self.rect.top = 0
                 self.y = self.rect.y
         if y_speed > 0:
-            i = pygame.rect.Rect(self.rect.left, self.rect.bottom + y_speed, self.rect.w, 1).collidelist(self.game.walls)
+            i = pygame.rect.Rect(self.rect.left, self.rect.bottom + y_speed, self.rect.w, 1).collidelist(self.level.walls)
             if i != -1:
-                wall: Wall = self.game.walls[i]
+                wall: Wall = self.level.walls[i]
                 y_speed = wall.rect.top - self.rect.bottom
             if self.rect.bottom < self.game.height:
                 self.y += y_speed
@@ -156,36 +153,6 @@ class Player(AnimatedSprite):
 
         self.rect.x = self.x
         self.rect.y = self.y
-
-        # for i in self.rect.collidelistall(self.game.walls):
-        #     wall: Wall = self.game.walls[i]
-        #     if x_speed > 0 and self.rect.right > wall.rect.left:
-        #         self.rect.right = wall.rect.left
-        #     if x_speed < 0 and self.rect.left < wall.rect.right:
-        #         self.rect.left = wall.rect.right
-        #     if y_speed > 0 and self.rect.bottom > wall.rect.top:
-        #         self.rect.bottom = wall.rect.top
-        #     if y_speed < 0 and self.rect.top < wall.rect.bottom:
-        #         self.rect.top = wall.rect.bottom
-        #     self.x = self.rect.x
-        #     self.y = self.rect.y
-
-
-
-
-    # def get_walls_collisions(self, x_speed, y_speed):
-    #     left = right = top = bottom = False
-    #     for i in self.rect.collidelistall(self.game.walls):
-    #         wall: Wall = self.game.walls[i]
-    #         if wall.rect.right - x_speed >= self.rect.left:
-    #             self.x = self.rect.left = wall.rect.right + 1
-    #         if wall.rect.left - x_speed <= self.rect.right:
-    #             right = True
-    #         if wall.rect.bottom - y_speed >= self.rect.top:
-    #             top = True
-    #         if wall.rect.top - y_speed <= self.rect.bottom:
-    #             bottom = True
-    #     return left, right, top, bottom
 
     def event(self, event: pygame.event.Event):
         pass
