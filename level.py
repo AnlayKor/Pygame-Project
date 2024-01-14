@@ -8,6 +8,7 @@ from floor import Floor
 from door import Door
 from zero import Zero
 from one import One
+from bug import Bug
 from barrel import Barrel
 from crate import Crate
 
@@ -20,11 +21,12 @@ class Level:
         self.door = None
 
         self.level = 1
-        self.room = 1
+        self.room = 2
 
         self.game = game
         self.walls = []
         self.floors = []
+        self.projectiles = []
         self.tile_size = 60
 
         self.load_room()
@@ -40,8 +42,6 @@ class Level:
         level = f'level{self.level}/'
         self.wall = f'wall{self.level}.png'
         self.floor = f'floor{self.level}.png'
-        if self.level == 1 and self.room == 2:
-            self.game.instructions = True
         with open(os.path.join('data/levels/', level, room)) as file:
             reader = csv.reader(file, delimiter=',', quotechar='"')
             for i, row in enumerate(reader):
@@ -72,6 +72,8 @@ class Level:
                         Zero(self, j * self.tile_size, i * self.tile_size, self.game.entities)
                     if tile == '1':
                         One(self, j * self.tile_size, i * self.tile_size, self.game.entities)
+                    if tile == '2':
+                        Bug(self, j * self.tile_size, i * self.tile_size, self.game.entities)
 
     def clear_room(self):
         self.walls = []
