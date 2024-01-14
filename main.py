@@ -12,6 +12,7 @@ class Game:
         pygame.init()
         self.character = None
         self.player = None
+        self.health = 250
 
         self.all_sprites = None
         self.floors = None
@@ -75,6 +76,8 @@ class Game:
         if self.character == 'vika':
             self.display_name('Вика')
 
+        self.line_health(self.health)
+
     def display_name(self, name):
         font = pygame.font.Font(None, 20)
         text = font.render(name, True, 'white')
@@ -128,6 +131,11 @@ class Game:
         enter_text = font.render('Чтобы скрыть сообщение, нажмите enter', True, 'black')
         enter_text_x, enter_text_y = 20, 510
         self.screen.blit(enter_text, (enter_text_x, enter_text_y))
+
+    def line_health(self, health):
+        pygame.draw.rect(self.screen, (150, 0, 0), (20, 20, 250, 20))
+        pygame.draw.rect(self.screen, (255, 0, 25), (20, 20, health, 20))
+        pygame.draw.rect(self.screen, (0, 0, 0), (20, 20, 250, 20), 3)
 
     def update(self, frame_time):
         delta = frame_time / 1000

@@ -41,10 +41,14 @@ class Player(AnimatedSprite):
         self.is_left = False
 
     def get_damage(self, damage):
-        pass
+        self.level.game.health -= damage
+        if self.level.game.health <= 0:
+            pass
 
     def heal(self, heal):
-        pass
+        self.level.game.health += heal
+        if self.level.game.health > 250:
+            self.level.game.health = 250
 
     def change_animation(self, animation):
         self.cur_frame = 0
