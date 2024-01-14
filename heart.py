@@ -28,7 +28,7 @@ class Heart(Sprite):
         relative_x = self.level.player.rect.centerx - mouse_pos[0]
         relative_y = self.level.player.rect.centery - mouse_pos[1]
 
-        if abs(relative_x) <= 80 and abs(relative_y) < 80:
+        if abs(relative_x) <= 80 and abs(relative_y) <= 80:
             self.level.player.heal(1)
             self.remove()
 
