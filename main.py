@@ -113,9 +113,9 @@ class Game:
         if number == 1:
             info = 'Для передвижения воспользуйтесь стрелочками или клавишами: w, a, s, d'
         elif number == 2:
-            info = 'Чтобы подобрать предмет, нажмите клавишу f'
+            info = 'Чтобы подобрать предмет, нажмите ПКМ'
         else:
-            info = 'Чтобы атаковать, нажмите клавишу e'
+            info = 'Чтобы атаковать, нажмите ЛКМ'
         text = font.render(info, True, 'black')
         text_x, text_y = 20, 480
         self.screen.blit(text, (text_x, text_y))
