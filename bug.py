@@ -2,11 +2,12 @@ import pygame
 import math
 
 from animated_sprite import AnimatedSprite
+from enemy import Enemy
 from wall import Wall
 from pixel import Pixel
 
 
-class Bug(AnimatedSprite):
+class Bug(Enemy):
     image = None
 
     def __init__(self, level, x, y, *groups):

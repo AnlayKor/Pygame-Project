@@ -2,10 +2,11 @@ import pygame
 import math
 
 from animated_sprite import AnimatedSprite
+from enemy import Enemy
 from wall import Wall
 
 
-class Zero(AnimatedSprite):
+class Zero(Enemy):
     image = None
 
     def __init__(self, level, x, y, *groups):

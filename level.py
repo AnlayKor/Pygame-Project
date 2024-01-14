@@ -2,6 +2,7 @@ import pygame
 import csv
 import os
 
+from heart import Heart
 from player import Player
 from wall import Wall
 from floor import Floor
@@ -21,12 +22,15 @@ class Level:
         self.door = None
 
         self.level = 1
-        self.room = 2
+        self.room = 1
 
         self.game = game
         self.walls = []
         self.floors = []
         self.projectiles = []
+        self.weapons = []
+        self.enemies = []
+        self.collectables = []
         self.tile_size = 60
 
         self.load_room()
@@ -69,15 +73,26 @@ class Level:
                         self.door = Door(self, j * self.tile_size, i * self.tile_size,
                                          self.tile_size, self.tile_size, self.game.walls)
                     if tile == '0':
-                        Zero(self, j * self.tile_size, i * self.tile_size, self.game.entities)
+                        zero = Zero(self, j * self.tile_size, i * self.tile_size, self.game.entities)
+                        self.enemies.append(zero)
                     if tile == '1':
-                        One(self, j * self.tile_size, i * self.tile_size, self.game.entities)
+                        one = One(self, j * self.tile_size, i * self.tile_size, self.game.entities)
+                        self.enemies.append(one)
                     if tile == '2':
-                        Bug(self, j * self.tile_size, i * self.tile_size, self.game.entities)
+                        bug = Bug(self, j * self.tile_size, i * self.tile_size, self.game.entities)
+                        self.enemies.append(bug)
+                    if tile == 'H':
+                        heart = Heart(self, j * self.tile_size + self.tile_size / 2, i * self.tile_size + self.tile_size / 2,
+                                      self.tile_size / 2, self.tile_size / 2, self.game.collectables)
+                        self.collectables.append(heart)
 
     def clear_room(self):
         self.walls = []
         self.floors = []
+        self.projectiles = []
+        self.weapons = []
+        self.enemies = []
+        self.collectables = []
         self.player = None
         self.door = None
 
