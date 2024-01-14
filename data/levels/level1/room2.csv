@@ -1,9 +1,7 @@
-W,W,W,W,W,W,W,W,W,W,W,W,W,W
-W, , , ,W,W, , , , , , , ,W
-W, , , , ,W, ,W, , , , , ,W
-W, , , , ,W, ,W, , , , , ,W
-P, , , , ,W, ,W,W,W,W, , ,D
-W, , , , ,W, , , , ,W, , ,W
-W, , , , ,W,W,W,W, ,W, , ,W
-W, , , , , , , , , ,W, , ,W
-W,W,W,W,W,W,W,W,W,W,W,W,W,W
+W,W,W,W,W,W,W,W,W,W
+W,P, , , , , ,1,0,W
+W, ,W, , , , ,1,0,W
+W, ,W, , , , ,1,0,D
+W, , , , , , ,1,0,W
+W, ,W, , , , ,1,0,W
+W,W,W,W,W,W,W,W,W,W

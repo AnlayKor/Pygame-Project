@@ -10,6 +10,9 @@ from level1 import Level1
 class Game:
     def __init__(self):
         pygame.init()
+        self.character = None
+        self.player = None
+
         self.all_sprites = None
         self.floors = None
         self.walls = None
@@ -49,6 +52,24 @@ class Game:
         self.floors.draw(self.screen)
         self.walls.draw(self.screen)
         self.entities.draw(self.screen)
+
+        if self.character == 'anton':
+            self.display_name('Антон')
+        if self.character == 'vika':
+            self.display_name('Вика')
+
+    def display_name(self, name):
+        font = pygame.font.Font(None, 20)
+        text = font.render(name, True, 'white')
+        text_x = self.player.rect.width // 2 - text.get_width() // 2 + self.player.rect.x
+        text_y = self.player.rect.y + self.player.rect.height + 10
+
+        s = pygame.Surface((text.get_width() + 8, text.get_height() + 6))
+        s.set_alpha(128)
+        s.fill('black')
+        self.screen.blit(s, (text_x - 4, text_y - 3))
+
+        self.screen.blit(text, (text_x, text_y))
 
     def reset_sprites(self):
         self.all_sprites = pygame.sprite.Group()

@@ -47,6 +47,7 @@ class Level:
                         self.walls.append(wall)
                     if tile == 'P':
                         self.player = Player(self, j * self.tile_size, i * self.tile_size, self.game.entities)
+                        self.game.player = self.player
                     if tile == 'D':
                         self.door = Door(self, j * self.tile_size, i * self.tile_size,
                                          self.tile_size, self.tile_size, self.game.walls)
