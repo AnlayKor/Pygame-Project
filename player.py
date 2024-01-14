@@ -43,7 +43,8 @@ class Player(AnimatedSprite):
     def get_damage(self, damage):
         self.level.game.health -= damage
         if self.level.game.health <= 0:
-            pass
+            self.level.room = 0
+            self.level.next_room()
 
     def heal(self, heal):
         self.level.game.health += heal
