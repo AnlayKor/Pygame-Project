@@ -21,6 +21,9 @@ class Game:
         self.weapons = None
         self.collectables = None
         self.reset_sprites()
+        
+        self.instructions = False
+        self.instructions_number = 1
 
         self.size = self.width, self.height = 60 * 14, 60 * 9
         self.screen = pygame.display.set_mode(self.size)
@@ -36,6 +39,11 @@ class Game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.terminate()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RETURN and self.instructions:
+                        if not (self.instructions_number == 1):
+                            self.instructions = False
+                        self.instructions_number += 1
                 for sprite in self.all_sprites:
                     sprite.event(event)
 
@@ -58,6 +66,9 @@ class Game:
         self.entities.draw(self.screen)
         self.projectiles.draw(self.screen)
         self.weapons.draw(self.screen)
+        
+        if self.instructions:
+            self.show_instructions(self.instructions_number)
 
         if self.character == 'anton':
             self.display_name('Антон')
@@ -102,6 +113,21 @@ class Game:
                         color = '#494949'
                 rect = (i, j, size, size)
                 pygame.draw.rect(self.screen, color, rect)
+    
+    def show_instructions(self, number):
+        font = pygame.font.Font(None, 25)
+        if number == 1:
+            info = 'Для передвижения воспользуйтесь стрелочками или клавишами: w, a, s, d'
+        elif number == 2:
+            info = 'Чтобы подобрать предмет, нажмите ПКМ'
+        else:
+            info = 'Чтобы атаковать, нажмите ЛКМ'
+        text = font.render(info, True, 'black')
+        text_x, text_y = 20, 480
+        self.screen.blit(text, (text_x, text_y))
+        enter_text = font.render('Чтобы скрыть сообщение, нажмите enter', True, 'black')
+        enter_text_x, enter_text_y = 20, 510
+        self.screen.blit(enter_text, (enter_text_x, enter_text_y))
 
     def update(self, frame_time):
         delta = frame_time / 1000
@@ -112,6 +138,7 @@ class Game:
 
     def start(self):
         Level(self)
+        self.instructions = True
 
 
 if __name__ == "__main__":
