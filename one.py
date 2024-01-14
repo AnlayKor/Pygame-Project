@@ -3,9 +3,10 @@ import math
 
 from animated_sprite import AnimatedSprite
 from wall import Wall
+from enemy import Enemy
 
 
-class One(AnimatedSprite):
+class One(Enemy):
     image = None
 
     def __init__(self, level, x, y, *groups):

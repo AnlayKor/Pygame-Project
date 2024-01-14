@@ -15,10 +15,10 @@ class Wall(Sprite):
         self.y = self.rect.y
 
     def remove(self):
-        for i, projectile in enumerate(self.level.projectiles):
-            if projectile.rect == self.rect:
-                del self.level.projectiles[i]
-        self.game.projectiles.remove(self)
+        for i, wall in enumerate(self.level.walls):
+            if wall.rect == self.rect:
+                del self.level.walls[i]
+        self.game.walls.remove(self)
         self.game.all_sprites.remove(self)
 
     def update(self, delta):

@@ -3,6 +3,7 @@ import pygame
 
 from animated_sprite import AnimatedSprite
 from wall import Wall
+from stick import Stick
 
 
 class Player(AnimatedSprite):
@@ -35,9 +36,14 @@ class Player(AnimatedSprite):
         self.cur_animation = 'idle'
         self.time_before_next_frame = 1
 
+        self.weapon = Stick(self.level, self, self.game.weapons)
+
         self.is_left = False
 
     def get_damage(self, damage):
+        pass
+
+    def heal(self, heal):
         pass
 
     def change_animation(self, animation):
@@ -98,8 +104,10 @@ class Player(AnimatedSprite):
 
         if self.is_left:
             self.image = pygame.transform.flip(self.frames[self.cur_frame], 1, 0)
+            self.weapon.flipping = True
         else:
             self.image = self.frames[self.cur_frame]
+            self.weapon.flipping = False
 
         # normalizing player's direction
 
@@ -158,4 +166,6 @@ class Player(AnimatedSprite):
         self.rect.y = self.y
 
     def event(self, event: pygame.event.Event):
-        pass
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                self.weapon.attack(event.pos)
