@@ -8,6 +8,8 @@ from floor import Floor
 from door import Door
 from zero import Zero
 from one import One
+from barrel import Barrel
+from crate import Crate
 
 
 class Level:
@@ -45,6 +47,14 @@ class Level:
                         wall = Wall(self, j * self.tile_size, i * self.tile_size,
                                     self.tile_size, self.tile_size, self.game.walls)
                         self.walls.append(wall)
+                    if tile == 'C':
+                        crate = Crate(self, j * self.tile_size, i * self.tile_size,
+                                      self.tile_size, self.tile_size, self.game.walls)
+                        self.walls.append(crate)
+                    if tile == 'B':
+                        barrel = Barrel(self, j * self.tile_size, i * self.tile_size,
+                                        self.tile_size, self.tile_size, self.game.walls)
+                        self.walls.append(barrel)
                     if tile == 'P':
                         self.player = Player(self, j * self.tile_size, i * self.tile_size, self.game.entities)
                         self.game.player = self.player
