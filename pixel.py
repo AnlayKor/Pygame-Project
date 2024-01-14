@@ -17,6 +17,7 @@ class Pixel(Sprite):
         self.x_direction = x_direction
         self.y_direction = y_direction
         self.speed = 200
+        self.damage = 50
 
     def update(self, delta):
         self.move(self.x_direction * self.speed * delta,
@@ -24,7 +25,7 @@ class Pixel(Sprite):
 
         if self.rect.colliderect(self.level.player.rect):
             self.remove()
-            self.level.player.get_damage(1)
+            self.level.player.get_damage(self.damage)
 
     def remove(self):
         for i, projectile in enumerate(self.level.projectiles):
