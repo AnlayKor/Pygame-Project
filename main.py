@@ -18,6 +18,8 @@ class Game:
         self.walls = None
         self.entities = None
         self.projectiles = None
+        self.weapons = None
+        self.collectables = None
         self.reset_sprites()
         
         self.instructions = False
@@ -60,8 +62,10 @@ class Game:
 
         self.floors.draw(self.screen)
         self.walls.draw(self.screen)
+        self.collectables.draw(self.screen)
         self.entities.draw(self.screen)
         self.projectiles.draw(self.screen)
+        self.weapons.draw(self.screen)
         
         if self.instructions:
             self.show_instructions(self.instructions_number)
@@ -90,6 +94,8 @@ class Game:
         self.walls = pygame.sprite.Group()
         self.entities = pygame.sprite.Group()
         self.projectiles = pygame.sprite.Group()
+        self.weapons = pygame.sprite.Group()
+        self.collectables = pygame.sprite.Group()
 
     def draw_bg(self):
         size = 20
