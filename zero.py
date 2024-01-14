@@ -23,6 +23,8 @@ class Zero(Enemy):
         self.x_direction = 0
         self.y_direction = 0
 
+        self.health = 50
+
         self.animation_fps = 8
         self.time_before_next_frame = 1
 
