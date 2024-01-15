@@ -2,8 +2,6 @@ import pygame
 
 from sqlite3 import *
 
-from start_screen import StartScreen
-
 
 class StartTitles:
     def __init__(self, game):
@@ -26,6 +24,7 @@ class StartTitles:
         cur = con.cursor()
         cur.execute(f'INSERT INTO achievements (seconds, complexity) VALUES ({time}, {complexity})')
         con.commit()
+        con.close()
 
         font_name = pygame.font.Font(None, 65)
         font = pygame.font.Font(None, 45)
