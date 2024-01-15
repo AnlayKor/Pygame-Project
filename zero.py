@@ -24,6 +24,8 @@ class Zero(Enemy):
         self.x_direction = 0
         self.y_direction = 0
 
+        if level.game.character == 'anton':
+            Zero.default_health *= 2
         self.health = Zero.default_health
 
         self.animation_fps = 8
