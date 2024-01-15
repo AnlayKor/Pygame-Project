@@ -1,6 +1,7 @@
 import pygame
 from sprite import Sprite
 from character_choice import CharacterChoice
+from achievements import Achievements
 
 
 class StartScreen(Sprite):
@@ -72,8 +73,12 @@ class StartScreen(Sprite):
                             self.open_character_choice()
                             running = False
                         elif flag_button3:
-                            pass
+                            self.open_achievements()
+                            running = False
             pygame.display.flip()
 
     def open_character_choice(self):
         CharacterChoice(self.game)
+
+    def open_achievements(self):
+        Achievements(self.game)
