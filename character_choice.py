@@ -145,6 +145,6 @@ class CharacterChoice(Sprite):
                             running = False
             pygame.display.flip()
 
-        def choose_character(self, character):
-            self.game.character = character
-            self.game.start()
+    def choose_character(self, character):
+        self.game.character = character
+        self.game.start()
