@@ -9,7 +9,6 @@ from pixel import Pixel
 
 class Bug(Enemy):
     image = None
-    default_health = 100
 
     def __init__(self, level, x, y, *groups):
         Bug.image = pygame.transform.scale_by(self.load_image('bug.png'), 5)
@@ -21,10 +20,10 @@ class Bug(Enemy):
         self.x = self.rect.x
         self.y = self.rect.y
 
+        self.default_health = 100
         if level.game.character == 'anton':
-            self.health = Bug.default_health * 2
-        else:
-            self.health = Bug.default_health
+            self.default_health *= 2
+        self.health = self.default_health
 
         self.speed = 40
         self.x_direction = 0

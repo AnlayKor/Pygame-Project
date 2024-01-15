@@ -10,7 +10,6 @@ from enemy import Enemy
 
 class One(Enemy):
     image = None
-    default_health = 30
 
     def __init__(self, level, x, y, *groups):
         One.image = pygame.transform.scale_by(self.load_image('one.png'), 3)
@@ -22,10 +21,10 @@ class One(Enemy):
         self.x = self.rect.x
         self.y = self.rect.y
 
+        self.default_health = 30
         if level.game.character == 'anton':
-            self.health = One.default_health * 2
-        else:
-            self.health = One.default_health
+            self.default_health *= 2
+        self.health = self.default_health
 
         self.speed = 60
         self.x_direction = 0

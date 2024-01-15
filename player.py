@@ -4,11 +4,12 @@ import pygame
 from animated_sprite import AnimatedSprite
 from wall import Wall
 from stick import Stick
+from sword import Sword
+from bow import Bow
 
 
 class Player(AnimatedSprite):
     image = None
-    default_health = 250
     left_keys = (pygame.K_LEFT, pygame.K_a)
     right_keys = (pygame.K_RIGHT, pygame.K_d)
     up_keys = (pygame.K_UP, pygame.K_w)
@@ -31,8 +32,6 @@ class Player(AnimatedSprite):
         self.x_direction = 0
         self.y_direction = 0
 
-        self.health = Player.default_health
-
         self.idle_fps = 2
         self.walk_fps = 8
         self.animation_fps = self.idle_fps
@@ -44,15 +43,16 @@ class Player(AnimatedSprite):
         self.is_left = False
 
     def get_damage(self, damage):
-        self.health -= damage
-        if self.health <= 0:
+        self.game.health -= damage
+        if self.game.health <= 0:
+            self.game.reset_health()
             self.level.room = 0
             self.level.next_room()
 
     def heal(self, heal):
-        self.health += heal
-        if self.health > 250:
-            self.health = 250
+        self.game.health += heal
+        if self.game.health > 250:
+            self.game.health = 250
 
     def change_animation(self, animation):
         self.cur_frame = 0
@@ -173,7 +173,18 @@ class Player(AnimatedSprite):
         self.rect.x = self.x
         self.rect.y = self.y
 
+    def change_weapon(self, weapon):
+        self.weapon.remove()
+        self.weapon = weapon
+
     def event(self, event: pygame.event.Event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 self.weapon.attack(event.pos)
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_1:
+                self.change_weapon(Stick(self.level, self, self.game.weapons))
+            if event.key == pygame.K_2:
+                self.change_weapon(Sword(self.level, self, self.game.weapons))
+            if event.key == pygame.K_3:
+                self.change_weapon(Bow(self.level, self, self.game.weapons))

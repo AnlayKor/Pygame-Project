@@ -56,7 +56,7 @@ class StartTitles:
         game.screen.blit(text3, (text3_x, text3_y))
 
         text4 = font2.render(
-            f'Над игрой для вас работали Антон Лапин и Дёминова Виктория)', True, color1)
+            f'Над игрой для вас работали Антон Лапин и Виктория Дёминова)', True, color1)
         text4_x = 10
         text4_y = 460
         game.screen.blit(text4, (text4_x, text4_y))

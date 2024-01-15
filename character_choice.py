@@ -16,9 +16,9 @@ class CharacterChoice(Sprite):
         color2 = pygame.color.Color('red')
         color3 = pygame.color.Color('red')
 
-        f1 = False
-        f2 = False
-        f3 = False
+        button1 = False
+        button2 = False
+        button3 = False
 
         font_name = pygame.font.Font(None, 60)
         font = pygame.font.Font(None, 40)
@@ -90,7 +90,7 @@ class CharacterChoice(Sprite):
             stealth_text4_y = stealth_text3_y + stealth_text3.get_height() + 10
             game.screen.blit(stealth_text4, (stealth_text4_x, stealth_text4_y))
 
-            if f1:
+            if button1:
                 pygame.draw.line(game.screen, 'red',
                                  (noname_x + 4, noname_y + 4), (noname_x + noname.get_width() - 4,
                                                                 noname_y + noname.get_height() - 4), 6)
@@ -101,12 +101,12 @@ class CharacterChoice(Sprite):
             else:
                 stealth_color1 = pygame.color.Color((0, 0, 0))
 
-            if f2:
+            if button2:
                 stealth_color2 = pygame.color.Color((255, 0, 0))
             else:
                 stealth_color2 = pygame.color.Color((0, 0, 0))
 
-            if f3:
+            if button3:
                 stealth_color3 = pygame.color.Color((255, 0, 0))
             else:
                 stealth_color3 = pygame.color.Color((0, 0, 0))
@@ -119,28 +119,28 @@ class CharacterChoice(Sprite):
                     if (mouse_x > anton_x) and (mouse_x < anton_x + anton.get_width()) and (
                             mouse_y > anton_y) and (mouse_y < anton_y + anton.get_height()):
                         color3.hsva = color3.hsva[0], color3.hsva[1], 50, color3.hsva[3]
-                        f3 = True
+                        button3 = True
                     else:
                         color3 = pygame.color.Color('red')
-                        f3 = False
+                        button3 = False
                     if (mouse_x > vika_x) and (mouse_x < vika_x + vika.get_width()) and (
                             mouse_y > vika_y) and (mouse_y < vika_y + vika.get_height()):
                         color2.hsva = color2.hsva[0], color2.hsva[1], 50, color2.hsva[3]
-                        f2 = True
+                        button2 = True
                     else:
                         color2 = pygame.color.Color('red')
-                        f2 = False
+                        button2 = False
                     if (mouse_x > noname_x) and (mouse_x < noname_x + noname.get_width()) and (
                             mouse_y > noname_y) and (mouse_y < noname_y + noname.get_height()):
-                        f1 = True
+                        button1 = True
                     else:
-                        f1 = False
+                        button1 = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
-                        if f2:
+                        if button2:
                             self.choose_character('vika')
                             running = False
-                        elif f3:
+                        elif button3:
                             self.choose_character('anton')
                             running = False
             pygame.display.flip()

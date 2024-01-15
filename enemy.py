@@ -14,6 +14,8 @@ class Enemy(AnimatedSprite):
                     self.die(enemy)
 
     def die(self, enemy):
-        del enemy
+        for i, enemy in enumerate(self.level.enemies):
+            if enemy.rect == self.rect:
+                del self.level.enemies[i]
         self.game.entities.remove(self)
         self.game.all_sprites.remove(self)

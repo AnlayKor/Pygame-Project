@@ -13,7 +13,7 @@ class Game:
         self.time_start = None
         self.character = None
         self.player = None
-        self.health = 250
+        self.reset_health()
 
         self.all_sprites = None
         self.floors = None
@@ -81,7 +81,10 @@ class Game:
             if type(enemy) is not Player:
                 self.display_enemy_health(enemy)
 
-        self.line_health(self.player.health)
+        self.line_health(self.health)
+
+    def reset_health(self):
+        self.health = 250
 
     def display_name(self, name):
         font = pygame.font.Font(None, 20)
@@ -98,12 +101,13 @@ class Game:
 
     def display_enemy_health(self, enemy):
         pygame.draw.rect(self.screen, 'black', pygame.Rect(
-            enemy.rect.centerx - enemy.health / 2, enemy.rect.bottom,
-            enemy.health, 8
+            enemy.rect.centerx - 20, enemy.rect.bottom,
+            40, 8
         ))
+        health_percent = enemy.health / enemy.default_health
         pygame.draw.rect(self.screen, 'red', pygame.Rect(
-            enemy.rect.centerx - enemy.health / 2 + 2, enemy.rect.bottom + 2,
-            enemy.health - 4, 4
+            enemy.rect.centerx - 18, enemy.rect.bottom + 2,
+            36 * health_percent, 4
         ))
 
     def reset_sprites(self):
