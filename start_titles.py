@@ -1,14 +1,31 @@
 import pygame
+
+from sqlite3 import *
+
 from start_screen import StartScreen
 
 
 class StartTitles:
-    def __init__(self, game, time):
+    def __init__(self, game):
+
+        game.screen.fill((0, 0, 0))
+
+        time = (pygame.time.get_ticks() - game.time_start) // 1000
+        sec = time % 60
+        min = time // 60 % 60
+        hour = time // 60 // 60
 
         if game.character == 'anton':
             difficulty_level = 'высокой сложности'
+            complexity = 1
         else:
             difficulty_level = 'средней сложности'
+            complexity = 0
+
+        con = connect('data/Achievements.db')
+        cur = con.cursor()
+        cur.execute(f'INSERT INTO achievements (seconds, complexity) VALUES ({time}, {complexity})')
+        con.commit()
 
         font_name = pygame.font.Font(None, 65)
         font = pygame.font.Font(None, 45)
@@ -22,7 +39,7 @@ class StartTitles:
         text_y = 80
         game.screen.blit(text, (text_x, text_y))
 
-        text1 = font.render(f'Вы прошли уровень {difficulty_level} за {time}!', True, color1)
+        text1 = font.render(f'Вы прошли уровень {difficulty_level} за {hour}ч{min}м{sec}с!', True, color1)
         text1_x = game.width // 2 - text1.get_width() // 2
         text1_y = 200
         game.screen.blit(text1, (text1_x, text1_y))

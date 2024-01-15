@@ -14,6 +14,8 @@ from bug import Bug
 from barrel import Barrel
 from crate import Crate
 
+from start_titles import StartTitles
+
 
 class Level:
     def __init__(self, game):
@@ -22,7 +24,7 @@ class Level:
         self.player = None
         self.door = None
 
-        self.level = 1
+        self.level = 4
         self.room = 1
 
         self.game = game
@@ -109,9 +111,12 @@ class Level:
 
     def next_room(self):
         self.clear_room()
-        if self.room != 3:
-           self.room += 1
+        if self.level == 4:
+            StartTitles(self.game)
         else:
-            self.room = 1
-            self.level += 1
-        self.load_room()
+            if self.room != 3:
+                self.room += 1
+            else:
+                self.room = 1
+                self.level += 1
+            self.load_room()
