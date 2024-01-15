@@ -8,6 +8,7 @@ from wall import Wall
 
 class Zero(Enemy):
     image = None
+    default_health = 50
 
     def __init__(self, level, x, y, *groups):
         Zero.image = pygame.transform.scale_by(self.load_image('zero.png'), 3)
@@ -23,7 +24,7 @@ class Zero(Enemy):
         self.x_direction = 0
         self.y_direction = 0
 
-        self.health = 50
+        self.health = Zero.default_health
 
         self.animation_fps = 8
         self.time_before_next_frame = 1
