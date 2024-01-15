@@ -26,12 +26,16 @@ class Dino(Enemy):
         self.x_direction = 0
         self.y_direction = 0
 
+        if level.game.character == 'anton':
+            Dino.default_health *= 2
         self.health = Dino.default_health
 
         self.animation_fps = 8
         self.time_before_next_frame = 1
 
         self.damage = 60
+        if level.game.character == 'anton':
+            self.damage *= 1.5
         self.attack_speed = 1
         self.attack_range = 50
         self.time_before_next_attack = 1
