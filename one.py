@@ -20,6 +20,8 @@ class One(Enemy):
         self.x = self.rect.x
         self.y = self.rect.y
 
+        if level.game.character == 'anton':
+            One.default_health *= 2
         self.health = One.default_health
 
         self.speed = 60
