@@ -96,12 +96,16 @@ class Game:
         self.screen.blit(text, (text_x, text_y))
 
     def display_enemy_health(self, enemy):
+        if self.character == 'anton':
+            full_health = enemy.default_health * 2
+        else:
+            full_health = enemy.default_health
         pygame.draw.rect(self.screen, 'black', pygame.Rect(
-            enemy.rect.centerx - enemy.health / 2, enemy.rect.bottom,
-            enemy.health, 8
+            enemy.rect.centerx - full_health / 2, enemy.rect.bottom,
+            full_health, 8
         ))
         pygame.draw.rect(self.screen, 'red', pygame.Rect(
-            enemy.rect.centerx - enemy.health / 2 + 2, enemy.rect.bottom + 2,
+            enemy.rect.centerx - full_health / 2 + 2, enemy.rect.bottom + 2,
             enemy.health - 4, 4
         ))
 
