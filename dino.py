@@ -27,8 +27,9 @@ class Dino(Enemy):
         self.y_direction = 0
 
         if level.game.character == 'anton':
-            Dino.default_health *= 2
-        self.health = Dino.default_health
+            self.health = Dino.default_health * 2
+        else:
+            self.health = Dino.default_health
 
         self.animation_fps = 8
         self.time_before_next_frame = 1
