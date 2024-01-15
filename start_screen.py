@@ -12,8 +12,8 @@ class StartScreen(Sprite):
         color2 = pygame.color.Color('red')
         color3 = pygame.color.Color('red')
 
-        f2 = False
-        f3 = False
+        flag_button2 = False
+        flag_button3 = False
 
         font_name = pygame.font.Font(None, 80)
 
@@ -55,23 +55,23 @@ class StartScreen(Sprite):
                     if (mouse_x > text2_x - 20) and (mouse_x < text2_x - 20 + text2.get_width() + 40) and (
                             mouse_y > text2_y - 20) and (mouse_y < text2_y - 20 + text2.get_height() + 40):
                         color2.hsva = color2.hsva[0], color2.hsva[1], 50, color2.hsva[3]
-                        f2 = True
+                        flag_button2 = True
                     else:
                         color2 = pygame.color.Color('red')
-                        f2 = False
+                        flag_button2 = False
                     if (mouse_x > text3_x - 20) and (mouse_x < text3_x - 20 + text3.get_width() + 40) and (
                             mouse_y > text3_y - 20) and (mouse_y < text3_y - 20 + text3.get_height() + 40):
                         color3.hsva = color3.hsva[0], color3.hsva[1], 50, color3.hsva[3]
-                        f3 = True
+                        flag_button3 = True
                     else:
                         color3 = pygame.color.Color('red')
-                        f3 = False
+                        flag_button3 = False
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     if event.button == 1:
-                        if f2:
+                        if flag_button2:
                             self.open_character_choice()
                             running = False
-                        elif f3:
+                        elif flag_button3:
                             pass
             pygame.display.flip()
 
