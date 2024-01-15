@@ -22,8 +22,9 @@ class Bug(Enemy):
         self.y = self.rect.y
 
         if level.game.character == 'anton':
-            Bug.default_health *= 2
-        self.health = Bug.default_health
+            self.health = Bug.default_health * 2
+        else:
+            self.health = Bug.default_health
 
         self.speed = 40
         self.x_direction = 0

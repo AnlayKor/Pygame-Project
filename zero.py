@@ -27,13 +27,16 @@ class Zero(Enemy):
         self.y_direction = 0
 
         if level.game.character == 'anton':
-            Zero.default_health *= 2
-        self.health = Zero.default_health
+            self.health = Zero.default_health * 2
+        else:
+            self.health = Zero.default_health
 
         self.animation_fps = 8
         self.time_before_next_frame = 1
 
         self.damage = 40
+        if level.game.character == 'anton':
+            self.damage *= 1.5
         self.attack_speed = 1
         self.attack_range = 50
         self.time_before_next_attack = 1
