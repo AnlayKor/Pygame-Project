@@ -97,13 +97,12 @@ class Game:
 
     def display_enemy_health(self, enemy):
         pygame.draw.rect(self.screen, 'black', pygame.Rect(
-            enemy.rect.centerx - 20, enemy.rect.bottom,
-            40, 8
+            enemy.rect.centerx - enemy.health / 2, enemy.rect.bottom,
+            enemy.health, 8
         ))
-        health_percent = enemy.health / enemy.default_health
         pygame.draw.rect(self.screen, 'red', pygame.Rect(
-            enemy.rect.centerx - 18, enemy.rect.bottom + 2,
-            36 * health_percent, 4
+            enemy.rect.centerx - enemy.health / 2 + 2, enemy.rect.bottom + 2,
+            enemy.health - 4, 4
         ))
 
     def reset_sprites(self):
