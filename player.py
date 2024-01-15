@@ -5,6 +5,7 @@ from animated_sprite import AnimatedSprite
 from wall import Wall
 from stick import Stick
 from sword import Sword
+from bow import Bow
 
 
 class Player(AnimatedSprite):
@@ -185,3 +186,6 @@ class Player(AnimatedSprite):
             if event.key == pygame.K_2:
                 self.weapon.remove()
                 self.weapon = Sword(self.level, self, self.game.weapons)
+            if event.key == pygame.K_3:
+                self.weapon.remove()
+                self.weapon = Bow(self.level, self, self.game.weapons)

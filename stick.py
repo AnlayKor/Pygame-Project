@@ -26,7 +26,7 @@ class Stick(AnimatedSprite):
         
         self.attack_range = 120
         self.attack_speed = 4
-        self.time_before_next_attack = 1
+        self.time_before_next_attack = 0
 
         if level.game.character == 'anton':
             self.damage = 3
