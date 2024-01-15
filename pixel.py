@@ -18,6 +18,8 @@ class Pixel(Sprite):
         self.y_direction = y_direction
         self.speed = 200
         self.damage = 50
+        if level.game.character == 'anton':
+            self.damage *= 2
 
     def update(self, delta):
         self.move(self.x_direction * self.speed * delta,
