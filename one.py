@@ -34,6 +34,8 @@ class One(Enemy):
         self.time_before_next_frame = 1
 
         self.damage = 30
+        if level.game.character == 'anton':
+            self.damage *= 1.5
         self.attack_speed = 1
         self.attack_range = 50
         self.time_before_next_attack = 1
