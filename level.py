@@ -23,7 +23,7 @@ class Level:
         self.door = None
 
         self.level = 1
-        self.room = 2
+        self.room = 1
 
         self.game = game
         self.walls = []

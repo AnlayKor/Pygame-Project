@@ -12,7 +12,7 @@ class Game:
         pygame.init()
         self.character = None
         self.player = None
-        self.health = 250
+        self.reset_health()
 
         self.all_sprites = None
         self.floors = None
@@ -80,7 +80,10 @@ class Game:
             if type(enemy) is not Player:
                 self.display_enemy_health(enemy)
 
-        self.line_health(self.player.health)
+        self.line_health(self.health)
+
+    def reset_health(self):
+        self.health = 250
 
     def display_name(self, name):
         font = pygame.font.Font(None, 20)

@@ -19,10 +19,12 @@ class Arrow(Sprite):
         self.x_direction = x_direction
         self.y_direction = y_direction
         self.rotate(Arrow.image, math.degrees(-angle))
-        self.speed = 500
+        self.default_speed = 500
+        self.speed = self.default_speed
         self.damage = 50
 
     def update(self, delta):
+        self.speed -= 100 * delta
         self.move(self.x_direction * self.speed * delta,
                   self.y_direction * self.speed * delta)
         for enemy in self.level.enemies:
