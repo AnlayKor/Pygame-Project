@@ -68,8 +68,6 @@ class StartTitles:
                     game.terminate()
                 elif event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_RETURN:
-                        self.open_start_screen(game)
+                        game.open_start_screen()
+                        running = False
             pygame.display.flip()
-
-    def open_start_screen(self, game):
-        StartScreen(game)
