@@ -24,6 +24,8 @@ class Stick(AnimatedSprite):
         self.attacking = False
         self.flipping = False
 
+        self.attack_range = 120
+
         self.damage = 5
 
     def update(self, delta):
@@ -50,7 +52,7 @@ class Stick(AnimatedSprite):
         relative_x = self.player.rect.centerx - mouse_pos[0]
         relative_y = self.player.rect.centery - mouse_pos[1]
 
-        if abs(relative_x) <= 60 and abs(relative_y) < 60:
+        if abs(relative_x) + abs(relative_y) <= self.attack_range:
             for wall in self.level.walls:
                 if wall.rect.collidepoint(mouse_pos):
                     if type(wall) is Crate:
