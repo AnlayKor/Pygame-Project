@@ -4,6 +4,8 @@ import math
 from animated_sprite import AnimatedSprite
 from enemy import Enemy
 from wall import Wall
+from barrel import Barrel
+from crate import Crate
 
 
 class Zero(Enemy):
@@ -29,6 +31,11 @@ class Zero(Enemy):
         self.animation_fps = 8
         self.time_before_next_frame = 1
 
+        self.damage = 40
+        self.attack_speed = 1
+        self.attack_range = 50
+        self.time_before_next_attack = 1
+
     def update(self, delta):
         self.time_before_next_frame -= self.animation_fps * delta
         if self.time_before_next_frame <= 0:
@@ -47,6 +54,27 @@ class Zero(Enemy):
 
         self.move(self.x_direction * self.speed * delta,
                   self.y_direction * self.speed * delta)
+
+        # attacking player
+
+        if self.time_before_next_attack > 0:
+            self.time_before_next_attack -= self.attack_speed * delta
+
+        if abs(relative_x) + abs(relative_y) <= self.attack_range:
+            self.attack()
+
+    def attack(self):
+        if self.time_before_next_attack <= 0:
+            self.time_before_next_attack = 1
+            self.level.player.get_damage(self.damage)
+
+        for wall in self.level.walls:
+            if type(wall) is Crate or type(wall) is Barrel:
+                relative_x = wall.rect.centerx - self.rect.centerx
+                relative_y = wall.rect.centery - self.rect.centery
+
+                if abs(relative_x) + abs(relative_y) <= self.attack_range * 1.5:
+                    wall.remove()
 
     def event(self, event: pygame.event.Event):
         pass
