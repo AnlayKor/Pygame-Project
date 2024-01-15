@@ -76,7 +76,11 @@ class Game:
         if self.character == 'vika':
             self.display_name('Вика')
 
-        self.line_health(self.health)
+        for enemy in self.entities:
+            if type(enemy) is not Player:
+                self.display_enemy_health(enemy)
+
+        self.line_health(self.player.health)
 
     def display_name(self, name):
         font = pygame.font.Font(None, 20)
@@ -90,6 +94,17 @@ class Game:
         self.screen.blit(s, (text_x - 4, text_y - 3))
 
         self.screen.blit(text, (text_x, text_y))
+
+    def display_enemy_health(self, enemy):
+        pygame.draw.rect(self.screen, 'black', pygame.Rect(
+            enemy.rect.centerx - 20, enemy.rect.bottom,
+            40, 8
+        ))
+        health_percent = enemy.health / enemy.default_health
+        pygame.draw.rect(self.screen, 'red', pygame.Rect(
+            enemy.rect.centerx - 18, enemy.rect.bottom + 2,
+            36 * health_percent, 4
+        ))
 
     def reset_sprites(self):
         self.all_sprites = pygame.sprite.Group()

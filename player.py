@@ -8,6 +8,7 @@ from stick import Stick
 
 class Player(AnimatedSprite):
     image = None
+    default_health = 250
     left_keys = (pygame.K_LEFT, pygame.K_a)
     right_keys = (pygame.K_RIGHT, pygame.K_d)
     up_keys = (pygame.K_UP, pygame.K_w)
@@ -30,6 +31,8 @@ class Player(AnimatedSprite):
         self.x_direction = 0
         self.y_direction = 0
 
+        self.health = Player.default_health
+
         self.idle_fps = 2
         self.walk_fps = 8
         self.animation_fps = self.idle_fps
@@ -41,15 +44,15 @@ class Player(AnimatedSprite):
         self.is_left = False
 
     def get_damage(self, damage):
-        self.level.game.health -= damage
-        if self.level.game.health <= 0:
+        self.health -= damage
+        if self.health <= 0:
             self.level.room = 0
             self.level.next_room()
 
     def heal(self, heal):
-        self.level.game.health += heal
-        if self.level.game.health > 250:
-            self.level.game.health = 250
+        self.health += heal
+        if self.health > 250:
+            self.health = 250
 
     def change_animation(self, animation):
         self.cur_frame = 0
