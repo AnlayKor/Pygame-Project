@@ -24,7 +24,7 @@ class Level:
         self.player = None
         self.door = None
 
-        self.level = 4
+        self.level = 1
         self.room = 1
 
         self.game = game
@@ -34,6 +34,7 @@ class Level:
         self.weapons = []
         self.enemies = []
         self.collectables = []
+        self.effects = []
         self.tile_size = 60
 
         self.load_room()
@@ -104,6 +105,7 @@ class Level:
         self.weapons = []
         self.enemies = []
         self.collectables = []
+        self.effects = []
         self.player = None
         self.door = None
 

@@ -22,6 +22,7 @@ class Game:
         self.projectiles = None
         self.weapons = None
         self.collectables = None
+        self.effects = None
         self.reset_sprites()
         
         self.instructions = False
@@ -68,6 +69,7 @@ class Game:
         self.entities.draw(self.screen)
         self.projectiles.draw(self.screen)
         self.weapons.draw(self.screen)
+        self.effects.draw(self.screen)
         
         if self.instructions:
             self.show_instructions(self.instructions_number)
@@ -118,6 +120,7 @@ class Game:
         self.projectiles = pygame.sprite.Group()
         self.weapons = pygame.sprite.Group()
         self.collectables = pygame.sprite.Group()
+        self.effects = pygame.sprite.Group()
 
     def draw_bg(self):
         size = 20
