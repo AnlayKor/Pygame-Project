@@ -10,6 +10,7 @@ from level import Level
 class Game:
     def __init__(self):
         pygame.init()
+        self.time_start = None
         self.character = None
         self.player = None
         self.health = 250
@@ -159,6 +160,7 @@ class Game:
         StartScreen(self)
 
     def start(self):
+        self.time_start = pygame.time.get_ticks()
         Level(self)
         self.instructions = True
 
