@@ -175,17 +175,18 @@ class Player(AnimatedSprite):
         self.rect.x = self.x
         self.rect.y = self.y
 
+    def change_weapon(self, weapon):
+        self.weapon.remove()
+        self.weapon = weapon
+
     def event(self, event: pygame.event.Event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 self.weapon.attack(event.pos)
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_1:
-                self.weapon.remove()
-                self.weapon = Stick(self.level, self, self.game.weapons)
+                self.change_weapon(Stick(self.level, self, self.game.weapons))
             if event.key == pygame.K_2:
-                self.weapon.remove()
-                self.weapon = Sword(self.level, self, self.game.weapons)
+                self.change_weapon(Sword(self.level, self, self.game.weapons))
             if event.key == pygame.K_3:
-                self.weapon.remove()
-                self.weapon = Bow(self.level, self, self.game.weapons)
+                self.change_weapon(Bow(self.level, self, self.game.weapons))
