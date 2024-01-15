@@ -23,10 +23,13 @@ class Stick(AnimatedSprite):
 
         self.attacking = False
         self.flipping = False
-
+        
         self.attack_range = 120
 
-        self.damage = 5
+        if level.game.character == 'anton':
+            self.damage = 3
+        else:
+            self.damage = 5
 
     def update(self, delta):
         self.rect.center = self.player.rect.center
