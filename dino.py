@@ -10,7 +10,6 @@ from crate import Crate
 
 class Dino(Enemy):
     image = None
-    default_health = 70
 
     def __init__(self, level, x, y, *groups):
         Dino.image = pygame.transform.scale_by(self.load_image('dino.png'), 2.5)
@@ -26,10 +25,10 @@ class Dino(Enemy):
         self.x_direction = 0
         self.y_direction = 0
 
+        self.default_health = 70
         if level.game.character == 'anton':
-            self.health = Dino.default_health * 2
-        else:
-            self.health = Dino.default_health
+            self.default_health *= 2
+        self.health = self.default_health
 
         self.animation_fps = 8
         self.time_before_next_frame = 1
