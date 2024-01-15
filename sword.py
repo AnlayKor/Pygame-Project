@@ -5,12 +5,12 @@ from barrel import Barrel
 from crate import Crate
 
 
-class Stick(AnimatedSprite):
+class Sword(AnimatedSprite):
     image = None
 
     def __init__(self, level, player, *groups):
-        Stick.image = pygame.transform.scale_by(self.load_image('stickanim.png'), 1/4)
-        super().__init__(level.game, Stick.image, 1, 5, *groups)
+        Sword.image = pygame.transform.scale_by(self.load_image('swordanim.png'), 1 / 4)
+        super().__init__(level.game, Sword.image, 1, 5, *groups)
         self.level = level
         self.level.weapons.append(self)
         self.player = player
@@ -23,15 +23,15 @@ class Stick(AnimatedSprite):
 
         self.attacking = False
         self.flipping = False
-        
-        self.attack_range = 120
-        self.attack_speed = 4
+
+        self.attack_range = 130
+        self.attack_speed = 2
         self.time_before_next_attack = 0
 
         if level.game.character == 'anton':
-            self.damage = 3
+            self.damage = 9
         else:
-            self.damage = 5
+            self.damage = 15
 
     def update(self, delta):
         self.rect.center = self.player.rect.center
