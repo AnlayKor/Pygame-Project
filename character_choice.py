@@ -146,5 +146,5 @@ class CharacterChoice(Sprite):
             pygame.display.flip()
 
         def choose_character(self, character):
-        self.game.character = character
-        self.game.start()
+            self.game.character = character
+            self.game.start()

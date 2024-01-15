@@ -24,7 +24,7 @@ class Crate(Sprite):
     def update(self, delta):
         i = self.rect.collidelist(self.level.projectiles)
         if i != -1:
-            self.level.projectiles[i].remove()
+            # self.level.projectiles[i].remove()
             self.remove()
 
     def event(self, event: pygame.event.Event):
