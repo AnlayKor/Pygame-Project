@@ -8,45 +8,53 @@ from barrel import Barrel
 from crate import Crate
 
 
-class Zero(Enemy):
+class Dino(Enemy):
     image = None
-    default_health = 50
+    default_health = 70
 
     def __init__(self, level, x, y, *groups):
-        Zero.image = pygame.transform.scale_by(self.load_image('zero.png'), 3)
+        Dino.image = pygame.transform.scale_by(self.load_image('dino.png'), 2.5)
 
         self.level = level
-        super().__init__(level.game, Zero.image, 2, 1, *groups)
+        super().__init__(level.game, Dino.image, 2, 5, *groups)
 
         self.rect.topleft = x, y
         self.x = self.rect.x
         self.y = self.rect.y
 
-        self.speed = 40
+        self.speed = 100
         self.x_direction = 0
         self.y_direction = 0
 
         if level.game.character == 'anton':
-            self.health = Zero.default_health * 2
+            self.health = Dino.default_health * 2
         else:
-            self.health = Zero.default_health
+            self.health = Dino.default_health
 
         self.animation_fps = 8
         self.time_before_next_frame = 1
 
-        self.damage = 40
+        self.damage = 60
         if level.game.character == 'anton':
             self.damage *= 1.5
         self.attack_speed = 1
         self.attack_range = 50
         self.time_before_next_attack = 1
 
+        self.is_left = False
+
     def update(self, delta):
+        self.is_left = self.x_direction < 0
+
         self.time_before_next_frame -= self.animation_fps * delta
         if self.time_before_next_frame <= 0:
             self.time_before_next_frame = 1
             self.cur_frame = (self.cur_frame + 1) % len(self.frames)
-        self.image = self.frames[self.cur_frame]
+
+        if self.is_left:
+            self.image = pygame.transform.flip(self.frames[self.cur_frame], 1, 0)
+        else:
+            self.image = self.frames[self.cur_frame]
 
         # move towards the player
 
