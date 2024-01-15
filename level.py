@@ -2,6 +2,7 @@ import pygame
 import csv
 import os
 
+from dino import Dino
 from heart import Heart
 from player import Player
 from wall import Wall
@@ -22,7 +23,7 @@ class Level:
         self.door = None
 
         self.level = 1
-        self.room = 2
+        self.room = 1
 
         self.game = game
         self.walls = []
@@ -86,6 +87,9 @@ class Level:
                     if tile == '2':
                         bug = Bug(self, j * self.tile_size, i * self.tile_size, self.game.entities)
                         self.enemies.append(bug)
+                    if tile == '3':
+                        dino = Dino(self, j * self.tile_size, i * self.tile_size, self.game.entities)
+                        self.enemies.append(dino)
                     if tile == 'H':
                         heart = Heart(self, j * self.tile_size + self.tile_size / 2, i * self.tile_size + self.tile_size / 2,
                                       self.tile_size / 2, self.tile_size / 2, self.game.collectables)
