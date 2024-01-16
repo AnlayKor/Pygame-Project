@@ -2,6 +2,7 @@ import math
 import pygame
 
 from animated_sprite import AnimatedSprite
+from magic_stick import MagicStick
 from wall import Wall
 from stick import Stick
 from sword import Sword
@@ -188,3 +189,5 @@ class Player(AnimatedSprite):
                 self.change_weapon(Sword(self.level, self, self.game.weapons))
             if event.key == pygame.K_3:
                 self.change_weapon(Bow(self.level, self, self.game.weapons))
+            if event.key == pygame.K_4:
+                self.change_weapon(MagicStick(self.level, self, self.game.weapons))
