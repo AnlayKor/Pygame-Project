@@ -25,7 +25,7 @@ class Darina(Enemy):
         self.y = self.rect.y
         self.portal_pos = (x, y)
 
-        self.default_health = 10
+        self.default_health = 250
         if level.game.character == 'anton':
             self.default_health += 100
         self.health = self.default_health
