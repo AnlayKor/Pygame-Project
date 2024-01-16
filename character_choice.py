@@ -147,3 +147,4 @@ class CharacterChoice(Sprite):
 
     def choose_character(self, character):
         self.game.character = character
+        self.game.start()
