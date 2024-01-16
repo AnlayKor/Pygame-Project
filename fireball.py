@@ -5,12 +5,12 @@ import pygame
 from sprite import Sprite
 
 
-class Arrow(Sprite):
+class FireBall(Sprite):
     image = None
 
     def __init__(self, level, x, y, x_direction, y_direction, angle, *groups):
-        Arrow.image = pygame.transform.scale_by(self.load_image('arrow.png'), 1 / 4)
-        super().__init__(level.game, Arrow.image, *groups)
+        FireBall.image = pygame.transform.scale_by(self.load_image('fireball.png'), 2)
+        super().__init__(level.game, FireBall.image, *groups)
         self.level = level
         self.level.projectiles.append(self)
         self.rect.topleft = x, y
@@ -18,14 +18,14 @@ class Arrow(Sprite):
         self.y = self.rect.y
         self.x_direction = x_direction
         self.y_direction = y_direction
-        self.rotate(Arrow.image, math.degrees(-angle))
-        self.default_speed = 500
+        self.rotate(FireBall.image, math.degrees(-angle))
+        self.default_speed = 300
         self.speed = self.default_speed
 
         if level.game.character == 'anton':
-            self.damage = 9
-        else:
             self.damage = 15
+        else:
+            self.damage = 18
 
     def update(self, delta):
         self.speed -= 100 * delta
