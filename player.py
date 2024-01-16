@@ -3,6 +3,7 @@ import pygame
 
 from animated_sprite import AnimatedSprite
 from magic_stick import MagicStick
+from snake import Snake
 from wall import Wall
 from stick import Stick
 from sword import Sword
@@ -182,6 +183,7 @@ class Player(AnimatedSprite):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
                 self.weapon.attack(event.pos)
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_1:
                 self.change_weapon(Stick(self.level, self, self.game.weapons))
@@ -191,3 +193,4 @@ class Player(AnimatedSprite):
                 self.change_weapon(Bow(self.level, self, self.game.weapons))
             if event.key == pygame.K_4:
                 self.change_weapon(MagicStick(self.level, self, self.game.weapons))
+

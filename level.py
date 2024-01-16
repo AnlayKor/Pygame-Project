@@ -2,6 +2,7 @@ import pygame
 import csv
 import os
 
+from darina import Darina
 from dino import Dino
 from heart import Heart
 from player import Player
@@ -25,7 +26,7 @@ class Level:
         self.door = None
 
         self.level = 1
-        self.room = 2
+        self.room = 1
 
         self.game = game
         self.walls = []
@@ -94,6 +95,9 @@ class Level:
                     if tile == '3':
                         dino = Dino(self, j * self.tile_size, i * self.tile_size, self.game.entities)
                         self.enemies.append(dino)
+                    if tile == '9':
+                        darina = Darina(self, j * self.tile_size, i * self.tile_size, self.game.bosses)
+                        self.enemies.append(darina)
                     if tile == 'H':
                         heart = Heart(self, j * self.tile_size + self.tile_size / 2, i * self.tile_size + self.tile_size / 2,
                                       self.tile_size / 2, self.tile_size / 2, self.game.collectables)
