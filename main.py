@@ -1,7 +1,9 @@
 import pygame
 import sys
 
+from darina import Darina
 from player import Player
+from snake import Snake
 from wall import Wall
 from start_screen import StartScreen
 from level import Level
@@ -19,6 +21,7 @@ class Game:
         self.floors = None
         self.walls = None
         self.entities = None
+        self.bosses = None
         self.projectiles = None
         self.weapons = None
         self.collectables = None
@@ -65,6 +68,7 @@ class Game:
         self.walls.draw(self.screen)
         self.collectables.draw(self.screen)
         self.entities.draw(self.screen)
+        self.bosses.draw(self.screen)
         self.projectiles.draw(self.screen)
         self.weapons.draw(self.screen)
         self.effects.draw(self.screen)
@@ -78,8 +82,11 @@ class Game:
             self.display_name('Вика')
 
         for enemy in self.entities:
-            if type(enemy) is not Player:
+            if type(enemy) is not Player and type(enemy) is not Snake:
                 self.display_enemy_health(enemy)
+
+        for boss in self.bosses:
+            self.draw_boss_health(boss.health / boss.default_health)
 
         self.line_health(self.health)
 
@@ -115,6 +122,7 @@ class Game:
         self.floors = pygame.sprite.Group()
         self.walls = pygame.sprite.Group()
         self.entities = pygame.sprite.Group()
+        self.bosses = pygame.sprite.Group()
         self.projectiles = pygame.sprite.Group()
         self.weapons = pygame.sprite.Group()
         self.collectables = pygame.sprite.Group()
@@ -156,6 +164,11 @@ class Game:
         pygame.draw.rect(self.screen, (150, 0, 0), (20, 20, 250, 20))
         pygame.draw.rect(self.screen, (255, 0, 25), (20, 20, health, 20))
         pygame.draw.rect(self.screen, (0, 0, 0), (20, 20, 250, 20), 3)
+
+    def draw_boss_health(self, health):
+        pygame.draw.rect(self.screen, (150, 0, 0), (self.width - 270, 20, 250, 20))
+        pygame.draw.rect(self.screen, (255, 0, 25), (self.width - 270, 20, health * 250, 20))
+        pygame.draw.rect(self.screen, (0, 0, 0), (self.width - 270, 20, 250, 20), 3)
 
     def update(self, frame_time):
         delta = frame_time / 1000
