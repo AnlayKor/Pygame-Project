@@ -39,7 +39,7 @@ class Darina(Enemy):
 
         self.time_before_next_snake = 5
 
-        self.damage = 30
+        self.damage = 60
         if level.game.character == 'anton':
             self.damage *= 1.5
         self.attack_speed = 1
